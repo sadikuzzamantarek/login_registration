@@ -1,0 +1,26 @@
+#registration .button1 {
+  background-color: tomato;
+  color: white;
+  border: none;
+}
+
+#registration .button2 {
+  background-color: #4064AC;
+  color: white;
+  border: none;
+}
+
+#alertSection {
+  position: center;
+  background-image: url(error.jpg);
+  min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#alertSection .alert {
+  position: relative;
+  top: 200%;
+}
+/*# sourceMappingURL=style.css.map */
