@@ -92,17 +92,25 @@
         $password = password_hash($pass, PASSWORD_BCRYPT);
         $cPassword = password_hash($cpass, PASSWORD_BCRYPT);
 
+        // echo $password ."<br>";
+        // echo $cPassword;
+        // exit();
+
         $select = "SELECT * FROM registration WHERE email = '$email'";
         $query = mysqli_query($conn,$select);
         $emailCount = mysqli_num_rows($query);
         if($emailCount>0){
-            header('location:error-alert.php');
+            ?>
+                    <script>
+                        alert('Email Already Available 😢');
+                    </script>
+                    <?php
         }else{
-            if($password === $cPassword){
+            if($pass == $cpass){
 
-                $insert = "INSERT INTO registration (id, name, email, phone, pass, cpass) VALUES ('$user','$email','$phone','$password','$cPassword')";
+                $insert = "INSERT INTO registration (name, email, phone, pass, cpass) VALUES ('$user','$email','$phone','$password','$cPassword')";
 
-                $query2= mysqli_query($conn,$insert) or die(mysqli_error());
+                $query2= mysqli_query($conn,$insert);
                 if($query2){
                     ?>
                 <script>
@@ -117,10 +125,10 @@
                         <?php
                     }
                 
-                }else{
+                }else{   
                     ?>
                     <script>
-                        alert('Password not matched');
+                        alert('Password not matched 😢');
                     </script>
                     <?php
             }
