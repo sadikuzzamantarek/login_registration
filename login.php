@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +18,31 @@
 </head>
 
 <body>
+
+<?php
+if(isset($_POST['submit'])){
+    include 'conn.php';
+
+    $email = $_POST['email'];
+    $pass = $_POST['pass'];
+    $emailSearch = "SELECT * FROM registration WHERE email = '$email'";
+    $query = mysqli_query($conn, $emailSearch);
+    $emailCount = mysqli_num_rows($query);
+    if($emailCount){
+        $emailPass = mysqli_fetch_assoc($query);
+        $userPass  = $emailPass['pass'];
+        $userPassDecode = password_verify($pass, $userPass);
+        if($userPassDecode){
+            echo "Login Success";
+        }else{
+            echo "Password incorrect";
+        }
+    }else{
+        echo "Invalid Email"; 
+    }
+}
+
+?>
     <section class="py-5" id="login">
         <div class="container">
             <div class="row">
@@ -22,7 +51,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3 class="text-center">Login</h3>
-                    <form action="" method="POST">
+                    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
                         <div class="input-group mt-2">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
@@ -39,7 +68,7 @@
                         </div>
 
                         <div class="input-group mt-2">
-                            <input type="submit" class="btn btn-info btn-block" value="Login">
+                            <input type="submit" class="btn btn-info btn-block" value="Login" name="submit">
                         </div>
                     </form>
                     <div>

@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +35,7 @@
                         <div class="col-lg-2">Or</div>
                         <div class="col-lg-5"><hr></div>
                     </div>
-                    <form action="" method="POST">
+                    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
 
                         <div class="input-group mt-2">
                             <div class="input-group-prepend">
@@ -114,13 +119,13 @@
                 if($query2){
                     ?>
                 <script>
-                    alert('Insert Successfull');
+                    alert('Registration Successfull');
                 </script>
                     <?php
                     }else{
                         ?>
                         <script>
-                            alert('Not inserted 😢');
+                            alert('Err...Registration Failed 😢');
                         </script>
                         <?php
                     }
