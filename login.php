@@ -31,9 +31,18 @@ if(isset($_POST['submit'])){
     if($emailCount){
         $emailPass = mysqli_fetch_assoc($query);
         $userPass  = $emailPass['pass'];
+        $_SESSION['username'] = $emailPass['name'];
         $userPassDecode = password_verify($pass, $userPass);
         if($userPassDecode){
             echo "Login Success";
+
+            ?>
+            <script>
+                location.replace('index.php');
+            </script>
+
+            <?php
+
         }else{
             echo "Password incorrect";
         }
